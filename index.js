@@ -11,6 +11,7 @@ const methodOverride = require("method-override");
 mongoose
   .connect(process.env.dbURL, {
     useNewUrlParser: true,
+    useUnifiedTopology: true,
   })
   .then(() => {
     console.log("mongo connetion open!");
