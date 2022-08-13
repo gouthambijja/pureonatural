@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const { rmSync } = require("fs");
 const app = express();
@@ -8,7 +9,7 @@ const Product = require("./product");
 const methodOverride = require("method-override");
 
 mongoose
-  .connect("mongodb://localhost:27017/pureOnatural", {
+  .connect(process.env.dbURL, {
     useNewUrlParser: true,
   })
   .then(() => {
@@ -63,6 +64,6 @@ app.delete("/products/:id", async (req, res) => {
   await Product.findByIdAndDelete(req.params.id);
   res.redirect("/products");
 });
-app.listen("3000", () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log("app is listening on port 3000");
 });
