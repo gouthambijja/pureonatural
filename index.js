@@ -27,6 +27,10 @@ app.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
+app.get("/", (req, res) => {
+  res.redirect("/products");
+});
+
 app.get("/products", async (req, res) => {
   const products = await Product.find();
   res.render("products/products", { products });
